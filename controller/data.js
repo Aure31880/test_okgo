@@ -6,11 +6,11 @@ exports.getAndSaveFile = (req, res, next) => {
     AxiosService.getFiles()
         .then(result => {
             const dataFetch = result.data;
-            const dataParse = JSON.stringify(dataFetch);
-            console.log(dataParse);
+            const dataString = JSON.stringify(dataFetch);
+            console.log(dataString);
             const data = new Data({
-                id: dataParse.id,
-                file: dataParse
+                idData: dataFetch.id,
+                file: dataString
             });
 
             data.save()
@@ -21,6 +21,8 @@ exports.getAndSaveFile = (req, res, next) => {
 }
 
 exports.getFiles = (req, res, next) => {
-
+    Data.findOne({ id: req.params.idData })
+        .then(file => res.status(200).json(file))
+        .catch(error => res.status(400).json(error));
 }
 

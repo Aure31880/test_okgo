@@ -1,10 +1,12 @@
 const mongoose = require('mongoose');
+const singleValidator = require('mongoose-unique-validator');
 
 
 const DataSchema = mongoose.Schema(
     {
-        id: {
-            type: Number
+        idData: {
+            type: String,
+            unique: true
         },
 
         file: {
@@ -13,5 +15,6 @@ const DataSchema = mongoose.Schema(
     }
 )
 
+DataSchema.plugin(singleValidator);
 
 module.exports = mongoose.model('Data', DataSchema)
