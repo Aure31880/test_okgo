@@ -24,6 +24,7 @@ app.use((req, res, next) => {
 
 app.use(express.json());
 
-app.use(DataRouter);
+// app.use(DataRouter);
+app.use('/api/file', DataRouter);
 
 module.exports = app;

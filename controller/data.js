@@ -26,3 +26,22 @@ exports.getFiles = (req, res, next) => {
         .catch(error => res.status(400).json(error));
 }
 
+exports.updateFile = (req, res, next) => {
+    Data.updateOne({ _id: req.params.idData }, { ...req.body, _id: req.params.idData })
+        .then(() => res.status(200).json({ message: 'File modifié !' }))
+        .catch(error => res.status(400).json({ error }))
+}
+
+exports.deleteFile = (req, res, next) => {
+    Data.findOne({ id: req.params.idData })
+        .then(result => {
+            console.log(result);
+            if (!result) {
+                return res.status(404).json({ message: "Le fichier n'existe pas" })
+            }
+            Data.deleteOne({ id: req.params.idData })
+                .then(() => res.status(201).json({ message: 'Fichier supprimer !' }))
+                .catch(error => res.status(400).json({ error }));
+        })
+        .catch(error => res.status(500).json(error))
+}
