@@ -1,11 +1,15 @@
 const express = require('express');
+const mongoose = require('mongoose');
+require('dotenv').config();
 
 const app = express();
 
-app.use((req, res, next) => {
-    res.json({ message: 'Test request !' });
-    next();
-})
+// Bdd connect
+mongoose.connect(process.env.SECRET_DB,
+    { useNewUrlParser: true, useUnifiedTopology: true }
+)
+    .then(() => console.log("Connexion à MongoDB réussie !"))
+    .catch(() => console.log("Connexion à MongoDB échouée !"));
 
 
 module.exports = app;
