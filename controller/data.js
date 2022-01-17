@@ -2,6 +2,7 @@ const express = require('express');
 const Data = require('../model/Data.js');
 var convert = require('xml-js');
 const AxiosService = require('../services/AxiosService');
+const FtpService = require('../services/FtpService');
 
 exports.getAndSaveFile = (req, res, next) => {
     AxiosService.getFiles()
@@ -50,7 +51,7 @@ exports.deleteFile = (req, res, next) => {
         .catch(error => res.status(500).json(error))
 }
 
-exports.getFileJsonToXml = (req, res, next) => {
+exports.convertFileJsonToXml = (req, res, next) => {
     Data.findOne({ id: req.params.idData })
         .then(file => {
             if (!file) {
@@ -63,4 +64,3 @@ exports.getFileJsonToXml = (req, res, next) => {
         })
         .catch(error => res.status(400).json(error));
 }
-
