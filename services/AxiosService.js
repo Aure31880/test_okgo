@@ -1,6 +1,4 @@
 const axios = require('axios');
-const { log } = require('console');
-const querystring = require('querystring');
 const Data = require('../model/Data');
 require('dotenv').config();
 

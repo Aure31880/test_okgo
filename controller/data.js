@@ -63,6 +63,9 @@ exports.convertFileJsonToXml = (req, res, next) => {
             FtpService.addFile(resultConvert)
                 .then(result => res.satus(200).send(result))
                 .catch(error => res.status(400).json(error))
+            // FtpService.getFiles()
+            //     .then(result => res.satus(200).send(result))
+            //     .catch(error => res.status(400).json(error))
         })
         .catch(error => res.status(404).json(error));
 }
