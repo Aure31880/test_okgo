@@ -60,7 +60,9 @@ exports.convertFileJsonToXml = (req, res, next) => {
             const dataToConvert = file.file;
             var options = { compact: true, ignoreComment: true, spaces: 4 };
             const resultConvert = convert.json2xml(dataToConvert, options);
-            return res.status(200).send(resultConvert)
+            FtpService.addFile(resultConvert)
+                .then(result => res.satus(200).send(result))
+                .catch(error => res.status(400).json(error))
         })
-        .catch(error => res.status(400).json(error));
+        .catch(error => res.status(404).json(error));
 }
