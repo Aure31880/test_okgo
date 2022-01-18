@@ -6,7 +6,6 @@ let ftpConnection = {
     host: process.env.FTP_HOST,
     user: process.env.FTP_LOGIN,
     password: process.env.FTP_PASS,
-    port: 21
 };
 
 exports.getFiles = () => {
